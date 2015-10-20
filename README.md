@@ -1,0 +1,2 @@
+# rubyFactory
+ruby main.rb
