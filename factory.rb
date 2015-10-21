@@ -7,25 +7,27 @@ class Factory
           instance_variable_set("@#{args[i]}", x)
         end
       end
-      public yield(block) if block_given?
+      class_eval &block if block_given?
       # Array-like getter
       def [] index
         case index.class.to_s
-        when "String"
-          self.send(index.to_sym)
-        when "Symbol"
+        when "String", "Symbol"
           self.send(index)
         when "Fixnum"
           self.instance_variable_get(instance_variables[index])
         end
       end
+      # More API
+      def size
+        instance_variables.size
+      end
+      alias_method :length, :size
+      alias_method :count, :size
       # Array-like setter
       def []= index, value
         case index.class.to_s
-        when "String"
-          self.send((index+"=").to_sym, value)
-        when "Symbol"
-          self.send((index.to_s<<"=").to_sym, value)
+        when "String", "Symbol"
+          self.send("#{index}=", value)
         when "Fixnum"
           self.instance_variable_set(instance_variables[index], value)
         end
@@ -34,7 +36,6 @@ class Factory
       def each &block
         self.instance_variables.map{|x| self.instance_variable_get(x.to_sym)}.each &block
       end
-
       def each_pair &block
         hash = Hash.new
         self.instance_variables.each do |x|
@@ -42,7 +43,9 @@ class Factory
         end
         return hash.each_pair &block
       end
+      def select &block
+        self.instance_variables.map{|x| self.instance_variable_get(x.to_sym)}.select &block
+      end
     end
-
   end
 end
