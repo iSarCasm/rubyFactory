@@ -74,6 +74,8 @@ p "select → an_enumerator"
   Lots = Struct.new(:a, :b, :c, :d, :e, :f)
   l = Lots.new(11, 22, 33, 44, 55, 66)
   p l.select {|v| (v % 2).zero? }   #=> [22, 44, 66]
+
+  
 p "all? {|i| block } → boolean"
 p "all? → an_enumerator"
   p l.all? {|v| v>10 }  # => true
