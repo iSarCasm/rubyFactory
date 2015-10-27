@@ -1,5 +1,12 @@
 require_relative 'factory'
 
+#      ______           __
+#     / ____/___ ______/ /_____  _______  __
+#    / /_  / __ `/ ___/ __/ __ \/ ___/ / / /
+#   / __/ / /_/ / /__/ /_/ /_/ / /  / /_/ /
+#  /_/    \__,_/\___/\__/\____/_/   \__, /
+#                                  /____/   
+
 # Should be no errors
 SomeCustomer = Factory.new(:name, :address) do
   def greeting

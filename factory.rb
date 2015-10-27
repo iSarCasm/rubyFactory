@@ -43,9 +43,6 @@ class Factory
         end
         return hash.each_pair &block
       end
-      def select &block
-        self.instance_variables.map{|x| self.instance_variable_get(x.to_sym)}.select &block
-      end
     end
   end
 end
