@@ -5,9 +5,15 @@ require_relative 'factory'
 #    / /_  / __ `/ ___/ __/ __ \/ ___/ / / /
 #   / __/ / /_/ / /__/ /_/ /_/ / /  / /_/ /
 #  /_/    \__,_/\___/\__/\____/_/   \__, /
-#                                  /____/   
+#                                  /____/
 
 # Should be no errors
+Factory.new("Customer", :name, :address)
+#=> Factory::Customer
+Factory::Customer.new("Dave", "123 Main")
+#=> #<Factory::Customer:0x00000001bfbc50 "name="Dave", "address="123 Main">
+
+
 SomeCustomer = Factory.new(:name, :address) do
   def greeting
     "Hello #{name}!"
@@ -68,6 +74,9 @@ p "select → an_enumerator"
   Lots = Struct.new(:a, :b, :c, :d, :e, :f)
   l = Lots.new(11, 22, 33, 44, 55, 66)
   p l.select {|v| (v % 2).zero? }   #=> [22, 44, 66]
+p "all? {|i| block } → boolean"
+p "all? → an_enumerator"
+  p l.all? {|v| v>10 }  # => true
 
 
 p "size → fixnum"
