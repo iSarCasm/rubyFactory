@@ -11,7 +11,7 @@ require_relative 'factory'
 Factory.new("Customer", :name, :address)
 #=> Factory::Customer
 Factory::Customer.new("Dave", "123 Main")
-#=> #<Factory::Customer:0x00000001bfbc50 "name="Dave", "address="123 Main">
+#=> #<Factory::Customer:0x00000001bfbc50 @name="Dave", @address="123 Main">
 
 
 SomeCustomer = Factory.new(:name, :address) do
@@ -65,9 +65,9 @@ p "each_pair → an_enumerator"
   joe = Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345)
   joe.each_pair {|name, value| puts("#{name} => #{value}") }
   # Produces:
-  # name => Joe Smith
-  # address => 123 Maple, Anytown NC
-  # zip => 12345
+  # @name => Joe Smith
+  # @address => 123 Maple, Anytown NC
+  # @zip => 12345
 
 p "select {|i| block } → array"
 p "select → an_enumerator"
@@ -75,7 +75,7 @@ p "select → an_enumerator"
   l = Lots.new(11, 22, 33, 44, 55, 66)
   p l.select {|v| (v % 2).zero? }   #=> [22, 44, 66]
 
-  
+
 p "all? {|i| block } → boolean"
 p "all? → an_enumerator"
   p l.all? {|v| v>10 }  # => true
@@ -84,3 +84,8 @@ p "all? → an_enumerator"
 p "size → fixnum"
   joe = Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345)
   p joe.length   #=> 3
+
+p "#hash works"
+  z   = [Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345),
+         Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345)]
+  p z.uniq
