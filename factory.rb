@@ -52,14 +52,14 @@ class Factory
       alias_method :count, :size
 
       def instance_values
-        self.instance_variables.map do |var|      # => [:name, :age]
-          self.instance_variable_get(var.to_sym)  # => ['John', 42]
+        self.instance_variables.map do |var|  # => [:name, :age]
+          self.instance_variable_get(var)     # => ['John', 42]
         end
       end
       def instance_hash
         self.instance_variables.inject(Hash.new) do |hash,var|
-          hash[var.to_sym] = self.instance_variable_get(var.to_sym) # => value
-          hash                                                      # => a_hash
+          hash[var] = self.instance_variable_get(var)   # => value
+          hash                                          # => a_hash
         end
       end
 

@@ -8,11 +8,10 @@ require_relative 'factory'
 #                                  /____/
 
 # Should be no errors
-Factory.new("Customer", :name, :address)
+p Factory.new("Customer", :name, :address)
 #=> Factory::Customer
-Factory::Customer.new("Dave", "123 Main")
-#=> #<Factory::Customer:0x00000001bfbc50 @name="Dave", @address="123 Main">
-
+p Factory::Customer.new("Dave", "123 Main")
+#=> #<Factory::Customer:0x00000001bfbc50 name="Dave", address="123 Main">
 
 SomeCustomer = Factory.new(:name, :address) do
   def greeting
@@ -31,19 +30,16 @@ p "struct == other → true or false"
 
 p "struct[member] → anObject"
 p "struct[index] → anObject"
-  joe = Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345)
-
   p joe["name"]   #=> "Joe Smith"
   p joe[:name]    #=> "Joe Smith"
   p joe[0]        #=> "Joe Smith"
 
+
 p "struct[name] = obj → obj"
 p "struct[index] = obj → obj"
-  joe = Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345)
-
-    joe["name"] = "Luke"
-    joe[1]      = "some st."
-    joe[:zip]   = "90210"
+  joe["name"] = "Luke"
+  joe[1]      = "some st."
+  joe[:zip]   = "90210"
 
   p joe.name      #=> "Luke"
   p joe.address   #=> "some st."
@@ -52,7 +48,7 @@ p "struct[index] = obj → obj"
 
 p "each {|obj| block } → struct"
 p "each → an_enumerator"
-  joe = Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345)
+  joe   = Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345)
   joe.each {|x| puts(x) }
   # Produces:
   # Joe Smith
@@ -62,7 +58,6 @@ p "each → an_enumerator"
 
 p "each_pair {|sym, obj| block } → struct"
 p "each_pair → an_enumerator"
-  joe = Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345)
   joe.each_pair {|name, value| puts("#{name} => #{value}") }
   # Produces:
   # @name => Joe Smith
@@ -76,16 +71,19 @@ p "select → an_enumerator"
   p l.select {|v| (v % 2).zero? }   #=> [22, 44, 66]
 
 
-p "all? {|i| block } → boolean"
+p "all? {|i| block } → true or false"
 p "all? → an_enumerator"
-  p l.all? {|v| v>10 }  # => true
+  p l.all? {|v| v>15 }        # => false
 
+p "any? {|i| block } → true or false"
+p "any? → an_enumerator"
+  p l.any? {|v| v.eql? 11 }   # => true
 
 p "size → fixnum"
-  joe = Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345)
   p joe.length   #=> 3
 
-p "#hash works"
+
+p "Array#uniq → #hash works"
   z   = [Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345),
          Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345)]
   p z.uniq
