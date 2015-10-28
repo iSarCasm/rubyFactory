@@ -1,2 +1,5 @@
-# rubyFactory
-ruby main.rb
+# RUBY FACTORY CLASS
+```
+ruby example.rb
+```
+https://repl.it/BUvh/15
