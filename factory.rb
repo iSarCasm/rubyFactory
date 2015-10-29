@@ -12,20 +12,20 @@ class Factory
       end
 
       # Basic stuff
-      def ==(other)
+      define_method :== do |other|
         instance_hash == other.instance_hash if other.is_a?(self.class)
       end
 
-      def eql?(other)
+      define_method :eql? do |other|
         self == other
       end
 
-      def hash
+      define_method :hash do
         instance_hash.hash
       end
 
       # Array-like getter
-      def [](index)
+      define_method :[] do |index|
         case index
         when String, Symbol
           instance_variable_get('@' << index.to_s)
@@ -34,7 +34,7 @@ class Factory
         end
       end
       # Array-like setter
-      def []=(index, value)
+      define_method :[]= do |index, value|
         case index
         when String, Symbol
           instance_variable_set('@' << index.to_s, value)
@@ -44,19 +44,19 @@ class Factory
       end
 
       # More API
-      def size
+      define_method :size do
         instance_variables.size
       end
       alias_method :length, :size
       alias_method :count, :size
 
-      def instance_values
+      define_method :instance_values do
         instance_variables.map do |var_name|  # => [:name, :age]
           instance_variable_get(var_name)     # => ['John', 42]
         end
       end
 
-      def instance_hash
+      define_method :instance_hash do
         instance_variables.each_with_object({}) do |var_name, hash|
           hash[var_name] = instance_variable_get(var_name)
         end
@@ -64,17 +64,17 @@ class Factory
 
       # Enumerables
       include Enumerable
-      def each(&block)
-        instance_values.each(&block)
+      define_method :each do |&passed_block|
+        instance_values.each(&passed_block)
       end
 
-      def each_pair(&block)
-        instance_hash.each_pair(&block)
+      define_method :each_pair do |&passed_block|
+        instance_hash.each_pair(&passed_block)
       end
 
       # Output
-      def inspect
-        super.gsub(/@/, '')  # get out!!11
+      define_method :inspect do
+        super().gsub(/@/, '')  # get out!!11
                              # \_O__
                              #  \__
                              #  |  \,@
