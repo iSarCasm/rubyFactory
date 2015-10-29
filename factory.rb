@@ -61,6 +61,7 @@ class Factory
           hash[var_name] = instance_variable_get(var_name)
         end
       end
+      alias_method :to_h, :instance_hash
 
       # Enumerables
       include Enumerable
