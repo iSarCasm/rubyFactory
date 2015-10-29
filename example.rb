@@ -83,7 +83,7 @@ puts "size → fixnum"
   p joe.length   #=> 3
 
 
-puts "Array#uniq → #hash works"
+puts "Array#uniq → Factory#hash works"
   z   = [Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345),
          Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345)]
   p z.uniq

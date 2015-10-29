@@ -5,9 +5,9 @@ class Factory
     new_class = Class.new do
       args.each { |x| attr_accessor x }
 
-      define_method :initialize do |*attr|
-        attr.each.with_index do |x, i|
-          instance_variable_set("@#{args[i]}", x)
+      define_method :initialize do |*atr|
+        args.each.with_index do |arg, i|
+          instance_variable_set("@#{arg}", (atr[i] || nil))
         end
       end
 
@@ -15,10 +15,7 @@ class Factory
       define_method :== do |other|
         instance_hash == other.instance_hash if other.is_a?(self.class)
       end
-
-      define_method :eql? do |other|
-        self == other
-      end
+      alias_method :eql?, :==
 
       define_method :hash do
         instance_hash.hash
@@ -28,9 +25,17 @@ class Factory
       define_method :[] do |index|
         case index
         when String, Symbol
-          instance_variable_get('@' << index.to_s)
+          if instance_variable_defined?('@' << index.to_s)
+            instance_variable_get('@' << index.to_s)
+          else
+            fail NameError, "no member '#{index}' in factory"
+          end
         when Fixnum
-          instance_variable_get(instance_variables[index])
+          if instance_variables[index]
+            instance_variable_get(instance_variables[index])
+          else
+            fail IndexError, "offset '#{index}' too large for factory(size:#{size})"
+          end
         end
       end
       # Array-like setter
