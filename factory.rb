@@ -58,7 +58,7 @@ class Factory
 
       def instance_hash
         instance_variables.each_with_object({}) do |var_name, hash|
-          hash[var] = instance_variable_get(var_name)
+          hash[var_name] = instance_variable_get(var_name)
         end
       end
 
