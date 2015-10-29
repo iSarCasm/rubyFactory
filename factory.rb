@@ -13,7 +13,7 @@ class Factory
 
       # Basic stuff
       def ==(other)
-        instance_hash == other.instance_hash if other.ia_a?(self.class)
+        instance_hash == other.instance_hash if other.is_a?(self.class)
       end
 
       def eql?(other)
