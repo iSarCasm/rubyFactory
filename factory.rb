@@ -82,10 +82,10 @@ class Factory
       # Output
       define_method :inspect do
         super().gsub(/@/, '')  # get out!!11
-                             # \_O__
-                             #  \__
-                             #  |  \,@
-                             # /
+                               # \_O__
+                               #  \__
+                               #  |  \,@
+                               # /
       end
       alias_method :to_s, :inspect
 
