@@ -51,14 +51,14 @@ class Factory
       alias_method :count, :size
 
       def instance_values
-        instance_variables.map do |var|  # => [:name, :age]
-          instance_variable_get(var)     # => ['John', 42]
+        instance_variables.map do |var_name|  # => [:name, :age]
+          instance_variable_get(var_name)     # => ['John', 42]
         end
       end
 
       def instance_hash
-        instance_variables.each_with_object({}) do |var, hash|
-          hash[var] = instance_variable_get(var)
+        instance_variables.each_with_object({}) do |var_name, hash|
+          hash[var] = instance_variable_get(var_name)
         end
       end
 
