@@ -38,6 +38,7 @@ class Factory
           end
         end
       end
+      
       # Array-like setter
       define_method :[]= do |index, value|
         case index
