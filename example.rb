@@ -87,3 +87,7 @@ puts "Array#uniq → #hash works"
   z   = [Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345),
          Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345)]
   p z.uniq
+
+
+puts "members → array"
+  p joe.members   #=> [:@name, :@address, :@zip]

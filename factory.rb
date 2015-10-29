@@ -44,6 +44,10 @@ class Factory
       end
 
       # More API
+      define_method :members do
+        instance_variables
+      end
+
       define_method :size do
         instance_variables.size
       end
@@ -55,6 +59,8 @@ class Factory
           instance_variable_get(var_name)     # => ['John', 42]
         end
       end
+      alias_method :to_a, :instance_values
+      alias_method :values, :instance_values
 
       define_method :instance_hash do
         instance_variables.each_with_object({}) do |var_name, hash|
