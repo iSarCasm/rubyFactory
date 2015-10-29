@@ -74,6 +74,10 @@ class Factory
       end
       alias_method :to_h, :instance_hash
 
+      define_method :values_at do |*selector|
+        instance_values.values_at(*selector)
+      end
+
       # Enumerables
       include Enumerable
       define_method :each do |&passed_block|

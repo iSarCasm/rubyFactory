@@ -91,3 +91,6 @@ puts "Array#uniq → Factory#hash works"
 
 puts "members → array"
   p joe.members   #=> [:@name, :@address, :@zip]
+
+puts "values_at(selector, ...) → an_array"
+  p joe.values_at 0, 2 #=> ["Joe Smith", 12345]
