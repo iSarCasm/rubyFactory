@@ -43,6 +43,7 @@ describe Factory do
 
         it 'returns false' do
           expect(instance == different).to be_falsey
+          expect(instance.eql? different).to be_falsey
         end
       end
 
@@ -54,6 +55,7 @@ describe Factory do
 
           it 'returns false' do
             expect(instance == different_factory_instance).to be_falsey
+            expect(instance.eql? different_factory_instance).to be_falsey
           end
         end
 
@@ -65,6 +67,7 @@ describe Factory do
 
             it 'returns false' do
               expect(instance == different_values_instance).to be_falsey
+              expect(instance.eql? different_values_instance).to be_falsey
             end
           end
 
@@ -73,6 +76,7 @@ describe Factory do
 
             it 'returns true' do
               expect(instance == same_values_instance).to be_truthy
+              expect(instance.eql? same_values_instance).to be_truthy
             end
           end
         end
