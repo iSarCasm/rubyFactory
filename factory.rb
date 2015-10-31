@@ -36,16 +36,28 @@ class Factory
           else
             fail IndexError, "offset '#{index}' too large for factory(size:#{size})"
           end
+        else
+          raise TypeError
         end
       end
-      
+
       # Array-like setter
       define_method :[]= do |index, value|
         case index
         when String, Symbol
-          instance_variable_set('@' << index.to_s, value)
+          if instance_variable_defined?('@' << index.to_s)
+            instance_variable_set('@' << index.to_s, value)
+          else
+            fail NameError, "no member '#{index}' in factory"
+          end
         when Fixnum
-          instance_variable_set(instance_variables[index], value)
+          if instance_variables[index]
+            instance_variable_set(instance_variables[index], value)
+          else
+            fail IndexError, "offset '#{index}' too large for factory(size:#{size})"
+          end
+        else
+          raise TypeError
         end
       end
 
