@@ -22,8 +22,8 @@ describe Factory do
       @instance = @klass.new("John Doe", 42)
     end
 
-    it 'evals block' do
-      # No idea
+    xit 'evals block' do
+
     end
 
     it 'can define custom public methods' do
