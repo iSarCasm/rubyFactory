@@ -11,7 +11,7 @@ Factory
   when first argument is a String
     sets a class constant
   when block given
-    evals block
+    evals block (PENDING: Temporarily skipped with xit)
     can define custom public methods
   class instances
     #==, #eql?
@@ -96,8 +96,4 @@ Factory
         evaluates block on every {variable => value} pair
     #inspect, #to_s
       returns string representation of an instance
-
-Finished in 0.02152 seconds (files took 0.1089 seconds to load)
-37 examples, 0 failures
-
 ```
